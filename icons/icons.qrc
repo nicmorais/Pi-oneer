@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>music_note.svg</file>
+        <file>play_arrow.svg</file>
+        <file>pause.svg</file>
+        <file>cable.svg</file>
+        <file>near_me.svg</file>
+        <file>radio.svg</file>
+        <file>settings.svg</file>
+        <file>navigate_next.svg</file>
+    </qresource>
+</RCC>

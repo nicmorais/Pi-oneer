@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Clock.qml</file>
+        <file>LargeButton.qml</file>
+        <file>HomePage.qml</file>
+        <file>SettingsPage.qml</file>
+        <file>RoundImage.qml</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>cat.jpg</file>
+    </qresource>
+</RCC>
