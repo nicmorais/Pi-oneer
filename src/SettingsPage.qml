@@ -13,6 +13,9 @@ Item {
         ListElement {
             name: "Theme"
         }
+        ListElement {
+            name: "Media directories"
+        }
     }
 
     ColumnLayout {

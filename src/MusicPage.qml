@@ -1,32 +1,13 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
+import pioneer 1.0
 
 Item {
-    ListModel {
-        id: model
-        ListElement {
-            title: "Every Breath You Take"
-            artist: "The Police"
-        }
-        ListElement {
-            title: "Estranged"
-            artist: "Guns N' Roses"
-        }
-        ListElement {
-            title: "Everybody Wants to Rule The World"
-            artist: "Tears For Fears"
-        }
-        ListElement {
-            title: "More Than Words"
-            artist: "Extreme"
-        }
-    }
-
     ColumnLayout {
         anchors.fill: parent
         ListView {
-            spacing: 10
-            model: model
+            spacing: 50
+            model: MusicTableModel{}
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.margins: 10
@@ -37,14 +18,14 @@ Item {
                     radius: Math.min(height, width) / 10
                     ColumnLayout {
                         Text {
-                            text: title
+                            text: model.title
                             color: "white"
-                            font.pointSize: 12
+                            font.pointSize: 15
                         }
                         Text {
-                            text: artist
+                            text: model.artist + " - " + model.album
                             color: "white"
-                            font.pointSize: 8
+                            font.pointSize: 12
                         }
                     }
             }

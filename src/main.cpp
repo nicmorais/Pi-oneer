@@ -1,6 +1,11 @@
+#include "musictablemodel.h"
+#include "musictagparser.h"
+
+#include <QDir>
+#include <QFileInfo>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-
+#include <iostream>
 
 int main(int argc, char *argv[])
 {
@@ -8,9 +13,10 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
     QGuiApplication app(argc, argv);
+    qmlRegisterType<MusicTableModel>("pioneer", 1, 0, "MusicTableModel");
 
     QQmlApplicationEngine engine;
-    const QUrl url(QStringLiteral("qrc:/pioneer/main.qml"));
+    const QUrl url(QStringLiteral("qrc:/pioneer/src/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
         &app, [url](QObject *obj, const QUrl &objUrl) {
             if (!obj && url == objUrl)

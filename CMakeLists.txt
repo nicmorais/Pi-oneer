@@ -13,7 +13,11 @@ find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Quick)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Quick)
 
 set(PROJECT_SOURCES
-        main.cpp
+        src/musictablemodel.h
+        src/musictablemodel.cpp
+        src/musictagparser.h
+        src/musictagparser.cpp
+        src/main.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -21,17 +25,19 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
     )
+
     qt_add_qml_module(pi-oneer
         URI pioneer
         VERSION 1.0
-        QML_FILES main.qml
-            Clock.qml
-            HomePage.qml
-            LargeButton.qml
-            RoundImage.qml
-            SettingsPage.qml
-            MusicPage.qml
+        QML_FILES src/main.qml
+            src/Clock.qml
+            src/HomePage.qml
+            src/LargeButton.qml
+            src/RoundImage.qml
+            src/SettingsPage.qml
+            src/MusicPage.qml
     )
+
     qt_add_resources(pi-oneer "icons"
         BASE "icons"
         PREFIX "/icons"
@@ -73,7 +79,7 @@ else()
 endif()
 
 target_link_libraries(pi-oneer
-  PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick)
+  PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick -lid3)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
