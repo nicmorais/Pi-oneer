@@ -11,12 +11,16 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Quick)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Quick)
+pkg_check_modules(LIBVNCSERVER REQUIRED IMPORTED_TARGET libvncserver)
+pkg_check_modules(LIBVNCCLIENT REQUIRED IMPORTED_TARGET libvncclient)
 
 set(PROJECT_SOURCES
-        src/musictablemodel.h
+        src/musictablemodel.hpp
         src/musictablemodel.cpp
-        src/musictagparser.h
+        src/musictagparser.hpp
         src/musictagparser.cpp
+        src/vncitem.hpp
+        src/vncitem.cpp
         src/main.cpp
 )
 
@@ -36,6 +40,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
             src/RoundImage.qml
             src/SettingsPage.qml
             src/MusicPage.qml
+            src/BottomBar.qml
+            src/PhoneConnectPage.qml
+
     )
 
     qt_add_resources(pi-oneer "icons"
@@ -52,6 +59,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
             icons/play_arrow.svg
             icons/radio.svg
             icons/settings.svg
+            icons/phone.svg
             icons/vinyl.jpg
     )
 
@@ -79,7 +87,10 @@ else()
 endif()
 
 target_link_libraries(pi-oneer
-  PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick -lid3)
+  PRIVATE Qt${QT_VERSION_MAJOR}::Core
+        Qt${QT_VERSION_MAJOR}::Quick
+        -lid3
+        PkgConfig::LIBVNCCLIENT)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

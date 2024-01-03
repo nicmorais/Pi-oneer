@@ -1,0 +1,35 @@
+# pi-oneer
+
+An free and opensource car in-dash stereo, made for SBCs like Raspberry Pis, Orange Pis and others.
+
+Current features:
+
+- Music indexing by ID3 tags
+
+- Phone mirroring with VNC (view only)
+
+Features in progress:
+
+- Music playback
+
+- Integrated maps (OpenStreetMap)
+
+
+
+## Building
+
+### Debian/Ubuntu
+
+Tested under Debian 12 with Xorg.
+
+```bash
+
+sudo apt update
+
+sudo apt install cmake g++ libqt6qml6 qt6-base-dev qt6-base-dev-tools qt6-declarative-dev pkg-config libid3-* libvncserver-dev libxcb-xinerama0 qml6-module-qtquick-controls qml6-module-qtquick-layouts qml6-module-qtquick-window qml6-module-qtqml-workerscript libqt6svg6
+
+cd Pi-oneer
+
+cmake -S . -B build
+
+```

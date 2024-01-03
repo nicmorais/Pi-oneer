@@ -14,4 +14,11 @@ Window {
         anchors.fill: parent
         initialItem: "HomePage.qml"
     }
+
+    BottomBar {
+        id: bottomBar
+        height: parent.height / 10
+        width: parent.width
+        anchors.bottom: stackView.bottom
+    }
 }

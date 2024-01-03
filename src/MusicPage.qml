@@ -5,6 +5,15 @@ import pioneer 1.0
 Item {
     ColumnLayout {
         anchors.fill: parent
+            Image {
+                source: "qrc:/icons/navigate_before_white.svg"
+                Layout.alignment: Qt.AlignLeft
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: stackView.pop()
+                }
+            }
+
         ListView {
             spacing: 50
             model: MusicTableModel{}

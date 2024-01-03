@@ -34,6 +34,13 @@ Item {
         LargeButton {
             title: "GPS"
             icon: "qrc:/icons/near_me.svg"
+            onClicked: bottomBar.hide()
+        }
+        LargeButton {
+            title: "Phone"
+            icon: "qrc:/icons/phone.svg"
+            onClicked: stackView.push("PhoneConnectPage.qml")
+
         }
         LargeButton {
             title: "Settings"
@@ -42,76 +49,5 @@ Item {
         }
     }
 
-    Rectangle {
-        height: parent.height / 10
-        width: parent.width
-        anchors.bottom: parent.bottom
-        Rectangle {
-            id: progressLine
-            width: parent.width / 3
-            height: 3
-            color: "blue"
-        }
 
-        RoundImage {
-            id: disk
-            source: "qrc:/icons/vinyl.jpg"
-            height: parent.height * 1.2
-            width: height
-            anchors.leftMargin: 20
-            anchors.left: parent.left
-            anchors.bottomMargin: 10
-            anchors.bottom: parent.bottom
-        }
-        RowLayout {
-            anchors.centerIn: parent
-
-            Image {
-                id: playIcon
-                source: "qrc:/icons/pause.svg"
-                state: "playing"
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: () =>{
-                               if(playIcon.state === "playing") {
-                                       playIcon.state = "stopped"
-                                   } else {
-                                       playIcon.state = "playing"
-                                   }
-                               }
-                }
-                states: [
-                    State {
-                        name: "playing"
-                        PropertyChanges {
-                            timer.running: true
-                            playIcon.source: "qrc:/icons/pause.svg"
-
-                        }
-                    },
-                    State {
-                        name: "stopped"
-                        PropertyChanges {
-                            timer.running: false
-                            playIcon.source: "qrc:/icons/play_arrow.svg"
-                        }
-                    }
-                ]
-            }
-            Text {
-                text: "Al Stewart - Year of The Cat"
-            }
-        }
-    }
-
-
-    Timer {
-        id: timer
-        interval: 50
-        repeat: true
-        onTriggered: {
-            progressLine.width += 1
-            disk.rotation += 5
-        }
-    }
 }

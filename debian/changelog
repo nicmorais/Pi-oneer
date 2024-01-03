@@ -1,0 +1,6 @@
+pi-oneer (0.1.0) UNRELEASED; urgency=medium
+
+  * Initial release.
+  * Implements VNC phone mirroring
+
+ -- Nicolas Morais <nmorais.st@gmail.com>  Wed, 03 Jan 2024 10:11:26 -0300
