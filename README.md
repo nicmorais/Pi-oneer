@@ -32,4 +32,6 @@ cd Pi-oneer
 
 cmake -S . -B build
 
+make -j
+
 ```

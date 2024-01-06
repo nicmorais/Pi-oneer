@@ -1,6 +1,8 @@
 #ifndef MUSICTABLEMODEL_H
 #define MUSICTABLEMODEL_H
 
+#include "trackmodel.hpp"
+
 #include <QAbstractItemModel>
 #include <QObject>
 
@@ -21,7 +23,9 @@ public:
 		TitleRole  = 20,
 		ArtistRole = 21,
 		AlbumRole  = 22,
+		PathRole   = 23,
 	};
+	Q_INVOKABLE TrackModel getAtIndex(int) const;
 
 private:
 	QList<QString> m_getFilesList();

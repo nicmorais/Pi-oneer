@@ -16,7 +16,7 @@ Item {
 
         ListView {
             spacing: 50
-            model: MusicTableModel{}
+            model: MusicTableModel {id: musicModel}
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.margins: 10
@@ -24,7 +24,7 @@ Item {
                     width: parent.width
                     height: 40
                     color: "black"
-                    radius: Math.min(height, width) / 10
+                    radius: Math.min(height, width) / 15
                     ColumnLayout {
                         Text {
                             text: model.title
@@ -36,6 +36,10 @@ Item {
                             color: "white"
                             font.pointSize: 12
                         }
+                    }
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: bottomBar.playTrack(musicModel.getAtIndex(index))
                     }
             }
         }

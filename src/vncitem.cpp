@@ -39,13 +39,17 @@ void VncItem::connect()
 	m_client->canHandleNewFBSize        = TRUE;
 	m_client->serverHost = strdup(ipAddress().toUtf8().constData());
 	m_client->serverPort = port();
+	m_client->connectTimeout = 10;
 
 	rfbClientSetClientData(m_client, nullptr, this);
 
 	if (rfbInitClient(m_client, 0, nullptr)) {
+		Q_EMIT connected();
 		setOpaquePainting(true);
 	}
 	else {
+		m_lastError = "Could not connect";
+		Q_EMIT lastErrorChanged();
 		return;
 	}
 
@@ -53,11 +57,15 @@ void VncItem::connect()
 		while (m_enabled) {
 			int i = WaitForMessage(m_client, 500);
 			if (i < 0) {
+				m_lastError = "Connection lost";
+				Q_EMIT lastErrorChanged();
 				rfbClientCleanup(m_client);
 				break;
 			}
 
 			if (i && !HandleRFBServerMessage(m_client)) {
+				m_lastError = "Connection lost";
+				Q_EMIT lastErrorChanged();
 				rfbClientCleanup(m_client);
 				break;
 			}
@@ -106,7 +114,56 @@ void VncItem::finishedFramebufferUpdate(rfbClient* client)
 	Q_EMIT frameUpdated();
 }
 
-void VncItem::onFrameUpdated()
+inline void VncItem::onFrameUpdated()
 {
 	update();
+}
+
+void VncItem::sendClickEvent(int x, int y)
+{
+	const QSize frameSize = m_frame.size() / m_frame.devicePixelRatio();
+
+	auto verticalFactor =
+		static_cast<qreal>(clipRect().height()) / frameSize.height();
+	auto horizontalFactor =
+		static_cast<qreal>(clipRect().width()) / frameSize.width();
+
+	m_mouseButtonMask |= 0x01;
+	SendPointerEvent(
+		m_client, qRound(x / horizontalFactor), qRound(y / verticalFactor),
+		m_mouseButtonMask);
+}
+
+void VncItem::sendReleaseEvent(int x, int y)
+{
+	const QSize frameSize = m_frame.size() / m_frame.devicePixelRatio();
+
+	auto verticalFactor =
+		static_cast<qreal>(clipRect().height()) / frameSize.height();
+	auto horizontalFactor =
+		static_cast<qreal>(clipRect().width()) / frameSize.width();
+
+	m_mouseButtonMask &= 0xfe;
+	SendPointerEvent(
+		m_client, qRound(x / horizontalFactor), qRound(y / verticalFactor),
+		m_mouseButtonMask);
+}
+
+void VncItem::sendMoveEvent(int x, int y)
+{
+	const QSize frameSize = m_frame.size() / m_frame.devicePixelRatio();
+
+	auto verticalFactor =
+		static_cast<qreal>(clipRect().height()) / frameSize.height();
+	auto horizontalFactor =
+		static_cast<qreal>(clipRect().width()) / frameSize.width();
+	m_mouseButtonMask &= ~(rfbButton4Mask | rfbButton5Mask);
+	SendPointerEvent(
+		m_client, qRound(x / horizontalFactor), qRound(y / verticalFactor),
+		m_mouseButtonMask);
+}
+
+QString VncItem::lastError() const
+{
+	return m_lastError;
 }
