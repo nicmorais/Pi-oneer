@@ -6,11 +6,13 @@ Current features:
 
 - Music indexing by ID3 tags
 
-- Phone mirroring with VNC (view only)
+- Phone mirroring with VNC
+
+- Music playback
 
 Features in progress:
 
-- Music playback
+- Wi-fi hotspot
 
 - Integrated maps (OpenStreetMap)
 
