@@ -1,6 +1,8 @@
 # pi-oneer
 
-An free and opensource car in-dash stereo, made for SBCs like Raspberry Pis, Orange Pis and others.
+A free and opensource car in-dash stereo, made for SBCs like Raspberry Pis, Orange Pis and others.
+
+![](https://i.imgur.com/Hp1oUfm.png)
 
 Current features:
 
