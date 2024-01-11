@@ -26,7 +26,7 @@ Tested under Debian 12 with Xorg.
 
 sudo apt update
 
-sudo apt install cmake g++ libqt6qml6 qt6-base-dev qt6-base-dev-tools qt6-declarative-dev pkg-config libid3-* libvncserver-dev libxcb-xinerama0 qml6-module-qtquick-controls qml6-module-qtquick-layouts qml6-module-qtquick-window qml6-module-qtqml-workerscript libqt6svg6
+sudo apt install cmake g++ libqt6qml6 qt6-base-dev qt6-base-dev-tools qt6-declarative-dev pkg-config libid3-* libvncserver-dev libxcb-xinerama0 qml6-module-qtquick-controls qml6-module-qtquick-layouts qml6-module-qtquick-window qml6-module-qtqml-workerscript libqt6svg6 qml6-module-qtquick-templates qt6-multimedia-dev
 
 cd Pi-oneer
 
