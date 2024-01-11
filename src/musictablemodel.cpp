@@ -1,6 +1,7 @@
 #include "musictablemodel.hpp"
 
 #include "musictagparser.hpp"
+#include "trackmodel.hpp"
 
 #include <QDir>
 
@@ -30,7 +31,9 @@ QVariant MusicTableModel::data(const QModelIndex& index, int role) const
 	if (role == MusicTableModel::AlbumRole) {
 		return MusicTagParser::getAlbum(m_filesList[row]);
 	}
-
+	if (role == MusicTableModel::PathRole) {
+		return m_filesList[row];
+	}
 	return {};
 }
 
@@ -45,6 +48,7 @@ QHash<int, QByteArray> MusicTableModel::roleNames() const
 	roles.emplace(MusicTableModel::TitleRole, "title");
 	roles.emplace(MusicTableModel::ArtistRole, "artist");
 	roles.emplace(MusicTableModel::AlbumRole, "album");
+	roles.emplace(MusicTableModel::PathRole, "path");
 
 	return roles;
 }
@@ -65,10 +69,24 @@ QList<QString> MusicTableModel::m_getFilesList()
 	QList<QString> l;
 	QFileInfoList list = dir.entryInfoList();
 	for (const auto& f : list) {
-		if (f.completeSuffix() != "mp3") {
+		if (f.suffix() != "mp3") {
 			continue;
 		}
 		l.append(f.absoluteFilePath());
 	}
 	return l;
+}
+
+TrackModel MusicTableModel::getAtIndex(int row) const
+{
+	auto title = MusicTagParser::getTitle(m_filesList[row]);
+	auto artist = MusicTagParser::getArtist(m_filesList[row]);
+	//	auto album = MusicTagParser::getAlbum(m_filesList[row]);
+
+	TrackModel track;
+	track.setTitle(title);
+	track.setArtist(artist);
+	track.setPath(m_filesList[row]);
+
+	return track;
 }

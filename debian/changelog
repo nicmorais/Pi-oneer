@@ -1,3 +1,10 @@
+pi-oneer (0.2.0) UNRELEASED; urgency=medium
+
+  * Implements music playback and controlling
+  * Implements VNC mirroring interaction
+
+ -- Nicolas Morais <nmorais.st@gmail.com>  Thu, 11 Jan 2024 11:57:00 -0300
+
 pi-oneer (0.1.0) UNRELEASED; urgency=medium
 
   * Initial release.

@@ -9,19 +9,22 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Quick)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Quick)
-pkg_check_modules(LIBVNCSERVER REQUIRED IMPORTED_TARGET libvncserver)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Quick Multimedia)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Quick Multimedia)
 pkg_check_modules(LIBVNCCLIENT REQUIRED IMPORTED_TARGET libvncclient)
 
 set(PROJECT_SOURCES
+        src/main.cpp
         src/musictablemodel.hpp
         src/musictablemodel.cpp
         src/musictagparser.hpp
         src/musictagparser.cpp
+        src/musicplaymanager.hpp
+        src/musicplaymanager.cpp
         src/vncitem.hpp
         src/vncitem.cpp
-        src/main.cpp
+        src/trackmodel.hpp
+        src/trackmodel.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -42,7 +45,6 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
             src/MusicPage.qml
             src/BottomBar.qml
             src/PhoneConnectPage.qml
-
     )
 
     qt_add_resources(pi-oneer "icons"
@@ -89,6 +91,7 @@ endif()
 target_link_libraries(pi-oneer
   PRIVATE Qt${QT_VERSION_MAJOR}::Core
         Qt${QT_VERSION_MAJOR}::Quick
+        Qt${QT_VERSION_MAJOR}::Multimedia
         -lid3
         PkgConfig::LIBVNCCLIENT)
 
