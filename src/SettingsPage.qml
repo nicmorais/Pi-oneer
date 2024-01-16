@@ -16,6 +16,10 @@ Item {
         ListElement {
             name: "Media directories"
         }
+        ListElement {
+            name: "Map"
+            page: "MapSettingsPage.qml"
+        }
     }
 
     ColumnLayout {
@@ -50,7 +54,14 @@ Item {
                         source: "qrc:/icons/navigate_next_white.svg"
                         anchors.right: parent.right
                     }
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: stackView.push(page)
+                    }
             }
         }
+
+
     }
+
 }

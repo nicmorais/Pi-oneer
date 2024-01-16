@@ -45,6 +45,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
             src/MusicPage.qml
             src/BottomBar.qml
             src/PhoneConnectPage.qml
+            src/MapPage.qml
+            src/MapSettingsPage.qml
     )
 
     qt_add_resources(pi-oneer "icons"
@@ -63,6 +65,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
             icons/settings.svg
             icons/phone.svg
             icons/vinyl.jpg
+            icons/volume_up.svg
+            icons/no_sound.svg
+            icons/search.svg
     )
 
 # Define target properties for Android with Qt 6 as:
