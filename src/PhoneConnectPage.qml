@@ -76,6 +76,7 @@ Item {
                 id: ipTextField
                 text: "192.168.0.8"
                 Layout.fillWidth: true
+                Material.accent: Material.LightBlue
             }
             Text {
                 text: "VNC Port:"
@@ -85,6 +86,7 @@ Item {
                 id: portTextField
                 text: "5900"
                 Layout.fillWidth: true
+                Material.accent: Material.LightBlue
             }
         }
         Button {

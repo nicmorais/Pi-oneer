@@ -9,7 +9,7 @@ MusicPlayManager::MusicPlayManager(QObject *parent)
 	m_player      = new QMediaPlayer{this};
 	m_audioOutput = new QAudioOutput{this};
 	m_player->setAudioOutput(m_audioOutput);
-	m_audioOutput->setVolume(m_volume);
+	m_volume = 1;
 	connect(m_player, &QMediaPlayer::positionChanged, this, [&]() {
 		m_position = m_player->position();
 		Q_EMIT positionChanged();
@@ -45,14 +45,15 @@ QString MusicPlayManager::status() const
 	return m_status;
 }
 
-int MusicPlayManager::volume() const
+float MusicPlayManager::volume() const
 {
 	return m_volume;
 }
 
-void MusicPlayManager::setVolume(int volume)
+void MusicPlayManager::setVolume(float volume)
 {
 	m_volume = volume;
+	m_audioOutput->setVolume(m_volume);
 }
 
 void MusicPlayManager::play(const TrackModel& track)

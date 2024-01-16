@@ -4,6 +4,7 @@ import pioneer 1.0
 
 Rectangle {
     id: bottomBarRect
+    property alias volume: musicManager.volume
 
     function playTrack (track : TrackModel) {
         musicManager.play(track)

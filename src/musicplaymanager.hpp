@@ -20,7 +20,7 @@ class MusicPlayManager : public QObject
 	Q_PROPERTY(int position READ position NOTIFY positionChanged)
 	Q_PROPERTY(int duration READ duration NOTIFY durationChanged)
 	Q_PROPERTY(QString status READ status NOTIFY statusChanged)
-	Q_PROPERTY(int volume READ volume WRITE setVolume NOTIFY volumeChanged)
+	Q_PROPERTY(float volume READ volume WRITE setVolume NOTIFY volumeChanged)
 
 public:
 	explicit MusicPlayManager(QObject* parent = nullptr);
@@ -29,8 +29,8 @@ public:
 	int position() const;
 	int duration() const;
 	QString status() const;
-	int volume() const;
-	void setVolume(int);
+	float volume() const;
+	void setVolume(float);
 
 	Q_INVOKABLE void play(const TrackModel&);
 	Q_INVOKABLE void resume();
@@ -42,7 +42,7 @@ private:
 	QMediaPlayer* m_player;
 	QAudioOutput* m_audioOutput;
 	QString m_status;
-	int m_volume;
+	float m_volume;
 
 Q_SIGNALS:
 	void currentTrackChanged();

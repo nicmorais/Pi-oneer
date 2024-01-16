@@ -15,6 +15,9 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
 	QGuiApplication app(argc, argv);
+	app.setApplicationName("pi-oneer");
+	app.setOrganizationName("Pi-oneer");
+
 	qmlRegisterType<VncItem>("pioneer", 1, 0, "VncItem");
 	qmlRegisterType<MusicTableModel>("pioneer", 1, 0, "MusicTableModel");
 	qmlRegisterType<TrackModel>("pioneer", 1, 0, "TrackModel");

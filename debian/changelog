@@ -1,3 +1,11 @@
+pi-oneer (0.3.0) UNRELEASED; urgency=medium
+
+  * Adds right drawer for setting music volume
+  * Experimental offline OSM maps implementation
+  * New page for configuring the path where map files are stored
+
+ -- Nicolas Morais <nmorais.st@gmail.com>  Thu, 16 Jan 2024 12:26:00 -0300
+
 pi-oneer (0.2.0) UNRELEASED; urgency=medium
 
   * Implements music playback and controlling
